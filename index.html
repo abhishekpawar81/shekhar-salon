@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shekhar Unisex Salon & Academy — Chhatrapati Sambhajinagar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161311;
+    --ink-soft:#211c19;
+    --parchment:#F1E9D8;
+    --parchment-dim:#e7dcc6;
+    --brass:#AD8A4E;
+    --brass-bright:#C7A565;
+    --wine:#7A2331;
+    --teal:#3D6B5C;
+    --line: rgba(241,233,216,0.14);
+    --line-dark: rgba(22,19,17,0.12);
+    --ease: cubic-bezier(.16,.84,.44,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--wine); color:var(--parchment);}
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    line-height:0.98;
+  }
+  .mono{
+    font-family:'Space Mono', monospace;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  section{position:relative;}
+  .wrap{max-width:1240px; margin:0 auto; padding:0 6vw;}
+
+  /* ===== progress bar ===== */
+  #progress{position:fixed; top:0; left:0; height:3px; width:0%; background:var(--brass); z-index:999; transition:width .05s linear;}
+
+  /* ===== nav ===== */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:900;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 6vw;
+    transition: background .5s var(--ease), padding .4s var(--ease), border-color .5s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  nav.scrolled{
+    background:rgba(22,19,17,0.92);
+    backdrop-filter: blur(10px);
+    padding:14px 6vw;
+    border-bottom:1px solid var(--line);
+  }
+  .logo{
+    font-family:'Fraunces', serif; font-weight:700; font-size:1.25rem;
+    color:var(--parchment); letter-spacing:0.01em;
+  }
+  .logo span{color:var(--brass-bright);}
+  .nav-links{display:flex; gap:34px; align-items:center;}
+  .nav-links a{
+    color:var(--parchment); font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase;
+    font-family:'Space Mono',monospace; opacity:0.75; transition:opacity .3s;
+    position:relative;
+  }
+  .nav-links a:hover{opacity:1;}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:-6px; width:0; height:1px; background:var(--brass-bright);
+    transition:width .3s var(--ease);
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--brass); color:var(--ink); padding:10px 20px; border-radius:2px;
+    font-family:'Space Mono',monospace; font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase;
+    transition:background .3s;
+  }
+  .nav-cta:hover{background:var(--brass-bright);}
+  @media(max-width:860px){ .nav-links{display:none;} }
+
+  /* ===== HERO ===== */
+  #hero{
+    height:100vh; min-height:680px; background:var(--ink); color:var(--parchment);
+    display:flex; flex-direction:column; justify-content:center;
+    overflow:hidden;
+  }
+  .hero-inner{ position:relative; z-index:3; padding-top:40px;}
+  .eyebrow{color:var(--brass-bright); font-size:0.72rem; display:flex; gap:14px; align-items:center; margin-bottom:26px;}
+  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--teal); display:inline-block; box-shadow:0 0 0 4px rgba(61,107,92,0.25);}
+  h1.hero-headline{
+    font-size:clamp(2.6rem, 7.4vw, 6.2rem);
+    max-width:14ch;
+    color:var(--parchment);
+  }
+  h1.hero-headline em{
+    font-style:normal; color:var(--brass-bright);
+  }
+  .hero-sub{
+    max-width:520px; font-size:1.05rem; line-height:1.6; color:rgba(241,233,216,0.72);
+    margin-top:28px; font-weight:300;
+  }
+  .hero-ctas{display:flex; gap:16px; margin-top:42px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 26px; font-family:'Space Mono',monospace; font-size:0.78rem;
+    letter-spacing:0.06em; text-transform:uppercase; border-radius:2px;
+    transition:transform .35s var(--ease), background .3s, color .3s, border-color .3s;
+  }
+  .btn-solid{background:var(--brass); color:var(--ink);}
+  .btn-solid:hover{background:var(--brass-bright); transform:translateY(-3px);}
+  .btn-line{border:1px solid rgba(241,233,216,0.35); color:var(--parchment);}
+  .btn-line:hover{border-color:var(--brass-bright); color:var(--brass-bright); transform:translateY(-3px);}
+
+  .rating-float{
+    position:absolute; top:14%; right:6vw; z-index:3;
+    background:rgba(241,233,216,0.06); border:1px solid var(--line);
+    backdrop-filter:blur(6px); padding:20px 24px; border-radius:4px;
+    text-align:center; min-width:150px;
+  }
+  .rating-float .num{font-family:'Fraunces',serif; font-size:2.6rem; color:var(--brass-bright); line-height:1;}
+  .rating-float .stars{color:var(--brass-bright); font-size:0.85rem; margin:8px 0 4px;}
+  .rating-float .count{font-size:0.66rem; color:rgba(241,233,216,0.55);}
+  @media(max-width:760px){ .rating-float{display:none;} }
+
+  /* cape reveal */
+  .cape{
+    position:absolute; inset:0; z-index:2; pointer-events:none;
+  }
+  .cape svg{width:100%; height:100%;}
+  .scroll-cue{
+    position:absolute; bottom:36px; left:6vw; z-index:3;
+    display:flex; align-items:center; gap:10px; color:rgba(241,233,216,0.55);
+    font-size:0.68rem;
+  }
+  .scroll-cue .line{width:36px; height:1px; background:rgba(241,233,216,0.4); position:relative; overflow:hidden;}
+  .scroll-cue .line::after{content:''; position:absolute; inset:0; background:var(--brass-bright); transform:translateX(-100%); animation:scrollcue 2.2s var(--ease) infinite;}
+  @keyframes scrollcue{ 50%{transform:translateX(0);} 100%{transform:translateX(100%);} }
+
+  /* ===== MARQUEE ===== */
+  .marquee-band{ background:var(--brass); overflow:hidden; padding:22px 0; border-top:1px solid rgba(22,19,17,0.15); border-bottom:1px solid rgba(22,19,17,0.15);}
+  .marquee-track{ display:flex; white-space:nowrap; width:max-content;}
+  .marquee-track span{
+    font-family:'Fraunces',serif; font-weight:600; font-size:1.6rem; color:var(--ink);
+    margin:0 2.2rem; display:flex; align-items:center; gap:2.2rem;
+  }
+  .marquee-track span::after{content:'✂'; font-size:1.1rem; opacity:0.55;}
+
+  /* ===== REVIEWS ===== */
+  #reviews{ background:var(--parchment); padding:140px 0 120px;}
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin-bottom:70px; flex-wrap:wrap;}
+  .section-tag{ font-size:0.72rem; color:var(--wine); margin-bottom:16px; display:block;}
+  .section-title{ font-size:clamp(2rem,4.4vw,3.2rem);}
+  .rating-block{ display:flex; align-items:center; gap:22px;}
+  .rating-block .big-num{ font-family:'Fraunces',serif; font-size:4.4rem; color:var(--wine); line-height:1;}
+  .rating-block .stars-row{color:var(--brass); font-size:1.1rem; margin-bottom:6px;}
+  .rating-block .rb-count{font-size:0.75rem; color:#6b6258;}
+
+  .review-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  @media(max-width:900px){ .review-grid{grid-template-columns:1fr;} }
+  .review-card{
+    background:#fff; border:1px solid var(--line-dark); border-radius:4px; padding:34px 30px;
+    opacity:0; transform:translateY(40px);
+  }
+  .review-card .stars{color:var(--brass); font-size:0.9rem; margin-bottom:16px;}
+  .review-card p{ font-size:0.98rem; line-height:1.68; color:#3a3530; font-weight:300;}
+  .review-card .who{ margin-top:22px; display:flex; align-items:center; gap:12px;}
+  .review-card .avatar{
+    width:38px; height:38px; border-radius:50%; background:var(--wine); color:var(--parchment);
+    display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-size:0.9rem;
+  }
+  .review-card .who .name{font-size:0.82rem; font-weight:600;}
+  .review-card .who .meta{font-size:0.7rem; color:#8a8177;}
+
+  /* ===== SERVICES ===== */
+  #services{ background:var(--ink); color:var(--parchment); padding:140px 0;}
+  #services .section-tag{color:var(--brass-bright);}
+  #services .section-title{color:var(--parchment);}
+  .svc-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); margin-top:70px; border:1px solid var(--line);}
+  @media(max-width:900px){ .svc-grid{grid-template-columns:1fr;} }
+  .svc-card{
+    background:var(--ink); padding:44px 34px; opacity:0; transform:translateY(30px);
+    perspective:900px;
+  }
+  .svc-inner{ transition:transform .6s var(--ease); transform-style:preserve-3d; position:relative;}
+  .svc-card:hover .svc-inner{ transform:rotateY(6deg) rotateX(2deg);}
+  .svc-icon{ font-size:1.7rem; color:var(--brass-bright); margin-bottom:22px; display:block;}
+  .svc-card h3{ font-size:1.35rem; margin-bottom:12px; color:var(--parchment); font-weight:600;}
+  .svc-card p{ font-size:0.88rem; color:rgba(241,233,216,0.55); line-height:1.6; font-weight:300; margin-bottom:20px;}
+  .svc-tag{ display:inline-block; font-family:'Space Mono',monospace; font-size:0.65rem; color:var(--teal); border:1px solid var(--teal); padding:4px 10px; border-radius:20px;}
+
+  /* ===== ACADEMY (horizontal pin) ===== */
+  #academy{ background:var(--parchment); overflow:hidden;}
+  .academy-head{ padding:120px 6vw 60px;}
+  .academy-pin{ height:100vh; display:flex; align-items:center;}
+  .academy-track{ display:flex; gap:0; will-change:transform;}
+  .lesson{
+    min-width:min(78vw,560px); height:56vh; margin-right:34px;
+    background:var(--ink); color:var(--parchment); border-radius:6px; padding:46px 40px;
+    display:flex; flex-direction:column; justify-content:space-between; flex-shrink:0;
+  }
+  .lesson:nth-child(2n){ background:var(--wine); }
+  .lesson:nth-child(3n){ background:var(--teal); }
+  .lesson .lesson-num{ font-family:'Space Mono',monospace; font-size:0.85rem; opacity:0.6;}
+  .lesson h3{ font-size:2.1rem; margin:20px 0 16px; color:inherit;}
+  .lesson p{ font-size:0.92rem; line-height:1.6; font-weight:300; opacity:0.82; max-width:38ch;}
+  .lesson .lesson-foot{ font-size:0.68rem; font-family:'Space Mono',monospace; opacity:0.55; text-transform:uppercase; letter-spacing:0.08em;}
+
+  /* ===== VISIT ===== */
+  #visit{ background:var(--ink); color:var(--parchment); padding:140px 0;}
+  #visit .section-tag{color:var(--brass-bright);}
+  #visit .section-title{color:var(--parchment);}
+  .visit-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:70px; margin-top:70px;}
+  @media(max-width:900px){ .visit-grid{grid-template-columns:1fr;} }
+  .info-row{ display:flex; gap:20px; padding:22px 0; border-bottom:1px solid var(--line);}
+  .info-row .k{ font-family:'Space Mono',monospace; font-size:0.68rem; color:var(--brass-bright); min-width:110px; text-transform:uppercase; letter-spacing:0.06em; padding-top:2px;}
+  .info-row .v{ font-size:1rem; font-weight:300; color:rgba(241,233,216,0.88); line-height:1.5;}
+  .badges{ display:flex; gap:12px; margin-top:26px; flex-wrap:wrap;}
+  .badge{ font-family:'Space Mono',monospace; font-size:0.66rem; border:1px solid var(--teal); color:var(--teal); padding:8px 14px; border-radius:20px; text-transform:uppercase; letter-spacing:0.05em;}
+
+  .popular-times{ background:rgba(241,233,216,0.04); border:1px solid var(--line); border-radius:6px; padding:34px;}
+  .pt-title{ font-size:0.78rem; color:rgba(241,233,216,0.6); margin-bottom:4px;}
+  .pt-day{ font-family:'Fraunces',serif; font-size:1.3rem; margin-bottom:22px;}
+  .pt-bars{ display:flex; align-items:flex-end; gap:6px; height:120px;}
+  .pt-bar{ flex:1; background:var(--brass); border-radius:2px 2px 0 0; opacity:0.35; transform:scaleY(0); transform-origin:bottom;}
+  .pt-bar.now{ opacity:1; background:var(--brass-bright);}
+  .pt-labels{ display:flex; justify-content:space-between; margin-top:10px; font-family:'Space Mono',monospace; font-size:0.6rem; color:rgba(241,233,216,0.4);}
+  .live-tag{ display:inline-flex; align-items:center; gap:8px; margin-top:18px; font-size:0.72rem; color:var(--brass-bright);}
+  .live-dot{ width:7px; height:7px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 4px rgba(61,107,92,0.3);}
+
+  /* ===== FOOTER ===== */
+  footer{ background:var(--brass); color:var(--ink); padding:110px 0 40px;}
+  .foot-cta{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:30px; border-bottom:1px solid rgba(22,19,17,0.2); padding-bottom:60px; margin-bottom:40px;}
+  .foot-cta h2{ font-size:clamp(2rem,5vw,3.6rem); max-width:11ch;}
+  .foot-btns{ display:flex; gap:14px; flex-wrap:wrap;}
+  .foot-btn{ background:var(--ink); color:var(--parchment); padding:16px 26px; border-radius:2px; font-family:'Space Mono',monospace; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; transition:transform .3s var(--ease);}
+  .foot-btn:hover{ transform:translateY(-3px);}
+  .foot-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; font-family:'Space Mono',monospace; font-size:0.7rem; opacity:0.7;}
+
+  .reveal{ opacity:0; transform:translateY(36px); }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav id="nav">
+  <div class="logo">SHEKHAR <span>/</span> S&A</div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#academy">Academy</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#visit">Visit</a>
+  </div>
+  <a class="nav-cta" href="tel:09021425152">Call to Book</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="cape" id="cape">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="none">
+      <path id="cape-path" d="M0,0 L1440,0 L1440,900 L0,900 Z" fill="#0d0b0a"/>
+    </svg>
+  </div>
+
+  <div class="wrap hero-inner">
+    <div class="eyebrow mono"><span class="dot"></span> Unisex Salon &amp; Academy — Chhatrapati Sambhajinagar</div>
+    <h1 class="hero-headline reveal-hero">The Chair Teaches<br>As Much As It <em>Cuts.</em></h1>
+    <p class="hero-sub reveal-hero">A working salon for everyday cuts, colour and care — and a working academy for Sambhajinagar's next stylists. One roof, two crafts, one standard.</p>
+    <div class="hero-ctas reveal-hero">
+      <a class="btn btn-solid" href="tel:09021425152">Book a Chair — 090214 25152</a>
+      <a class="btn btn-line" href="#academy">Explore the Academy</a>
+    </div>
+  </div>
+
+  <div class="rating-float reveal-hero">
+    <div class="num">4.8</div>
+    <div class="stars">★★★★★</div>
+    <div class="count mono">3,415 reviews</div>
+  </div>
+
+  <div class="scroll-cue"><span class="mono">Scroll</span><span class="line"></span></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-band">
+  <div class="marquee-track" id="marquee">
+    <span>Keratin Treatment</span><span>Hair Botox</span><span>Hair Extensions</span><span>Beard Styling</span><span>Bridal Makeup</span><span>Global Colour</span>
+    <span>Keratin Treatment</span><span>Hair Botox</span><span>Hair Extensions</span><span>Beard Styling</span><span>Bridal Makeup</span><span>Global Colour</span>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-tag mono">What Sambhajinagar Says</span>
+        <h2 class="section-title">Regulars, not one-time visitors.</h2>
+      </div>
+      <div class="rating-block">
+        <div class="big-num">4.8</div>
+        <div>
+          <div class="stars-row">★★★★★</div>
+          <div class="rb-count mono">from 3,415 google reviews</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-grid">
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>Came in for a beard shape-up and the stylist clearly took pride in the work. What stood out most was how warmly the whole team treated me from the moment I walked in.</p>
+        <div class="who">
+          <div class="avatar">R</div>
+          <div><div class="name">Rohit K.</div><div class="meta">Beard Styling</div></div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>Consistently solid craftsmanship — the kind of place locals point newcomers toward. Every visit has felt considered, not rushed, which is rare to find twice in a row.</p>
+        <div class="who">
+          <div class="avatar">R</div>
+          <div><div class="name">Rushikesh M.</div><div class="meta">Hair Styling</div></div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>Booked a makeup session before an event and the artist was meticulous about every detail. The finish held up all evening without needing a single touch-up.</p>
+        <div class="who">
+          <div class="avatar">T</div>
+          <div><div class="name">Tanishka G.</div><div class="meta">Bridal Makeup</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-tag mono">On The Floor</span>
+        <h2 class="section-title">Six services, one finish standard.</h2>
+      </div>
+    </div>
+
+    <div class="svc-grid">
+      <div class="svc-card reveal"><div class="svc-inner">
+        <span class="svc-icon">✂</span>
+        <h3>Cut &amp; Styling</h3>
+        <p>Precision cuts for every hair type, unisex — finished with a blow-dry that actually holds its shape.</p>
+        <span class="svc-tag">Walk-ins welcome</span>
+      </div></div>
+      <div class="svc-card reveal"><div class="svc-inner">
+        <span class="svc-icon">◈</span>
+        <h3>Keratin Treatment</h3>
+        <p>Smoothing therapy that cuts down frizz and drying time without weighing the hair flat.</p>
+        <span class="svc-tag">Book 48hrs ahead</span>
+      </div></div>
+      <div class="svc-card reveal"><div class="svc-inner">
+        <span class="svc-icon">◉</span>
+        <h3>Hair Botox</h3>
+        <p>Deep conditioning repair for damaged, colour-treated or heat-stressed hair — visible from session one.</p>
+        <span class="svc-tag">Popular</span>
+      </div></div>
+      <div class="svc-card reveal"><div class="svc-inner">
+        <span class="svc-icon">≡</span>
+        <h3>Hair Extensions</h3>
+        <p>Length and volume matched to your natural texture and colour, fitted by trained technicians.</p>
+        <span class="svc-tag">Consultation first</span>
+      </div></div>
+      <div class="svc-card reveal"><div class="svc-inner">
+        <span class="svc-icon">◇</span>
+        <h3>Beard Styling</h3>
+        <p>Shape-ups, hot towel finishes and beard colour for a sharper, more deliberate line.</p>
+        <span class="svc-tag">15–30 min</span>
+      </div></div>
+      <div class="svc-card reveal"><div class="svc-inner">
+        <span class="svc-icon">✦</span>
+        <h3>Bridal &amp; Party Makeup</h3>
+        <p>Long-wear makeup built for Sambhajinagar's climate — tested to outlast the whole event.</p>
+        <span class="svc-tag">Trial recommended</span>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMY -->
+<section id="academy">
+  <div class="academy-head">
+    <span class="section-tag mono">The Academy</span>
+    <h2 class="section-title">Four modules. One qualifying floor.</h2>
+    <p style="max-width:46ch; margin-top:18px; color:#5c5548; font-weight:300; font-size:0.98rem;">Every stylist trains through the same four modules before ever taking an unsupervised chair. Scroll to move through the programme.</p>
+  </div>
+
+  <div class="academy-pin" id="academyPin">
+    <div class="academy-track" id="academyTrack">
+      <div class="lesson">
+        <span class="lesson-num mono">Module 01</span>
+        <div>
+          <h3>Foundation Cutting</h3>
+          <p>Sectioning, blade control and the geometry behind every haircut, drilled until it's muscle memory.</p>
+        </div>
+        <span class="lesson-foot">Weeks 1–4</span>
+      </div>
+      <div class="lesson">
+        <span class="lesson-num mono">Module 02</span>
+        <div>
+          <h3>Colour &amp; Chemical Services</h3>
+          <p>Colour theory, keratin and botox application, and how to read hair before touching a single strand.</p>
+        </div>
+        <span class="lesson-foot">Weeks 5–9</span>
+      </div>
+      <div class="lesson">
+        <span class="lesson-num mono">Module 03</span>
+        <div>
+          <h3>Bridal &amp; Editorial Styling</h3>
+          <p>Makeup, draping and styling for events — working to a clock, not just to a mirror.</p>
+        </div>
+        <span class="lesson-foot">Weeks 10–13</span>
+      </div>
+      <div class="lesson">
+        <span class="lesson-num mono">Module 04</span>
+        <div>
+          <h3>Floor Practicum</h3>
+          <p>Supervised client sessions on the salon floor — the same standard every regular already expects.</p>
+        </div>
+        <span class="lesson-foot">Weeks 14–16</span>
+      </div>
+      <div class="lesson">
+        <span class="lesson-num mono">Enrolment</span>
+        <div>
+          <h3>Next Batch Opening Soon</h3>
+          <p>Seats are limited per batch to keep instructor time high. Call the salon to ask about the next start date.</p>
+        </div>
+        <span class="lesson-foot">Call 090214 25152</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit">
+  <div class="wrap">
+    <span class="section-tag mono">Find The Chair</span>
+    <h2 class="section-title">Pundlik Nagar Road.</h2>
+
+    <div class="visit-grid">
+      <div>
+        <div class="info-row">
+          <div class="k">Address</div>
+          <div class="v">Pundlik Nagar Rd, Near Ch. Shivaji Putala, Chhatrapati Sambhajinagar, Maharashtra 431009</div>
+        </div>
+        <div class="info-row">
+          <div class="k">Hours</div>
+          <div class="v">Open today · closes 9 pm</div>
+        </div>
+        <div class="info-row">
+          <div class="k">Phone</div>
+          <div class="v"><a href="tel:09021425152">090214 25152</a></div>
+        </div>
+        <div class="info-row">
+          <div class="k">Plus Code</div>
+          <div class="v">V984+6P Chhatrapati Sambhajinagar, Maharashtra</div>
+        </div>
+        <div class="badges">
+          <span class="badge">LGBTQ+ Friendly</span>
+          <span class="badge">Women-Owned</span>
+        </div>
+      </div>
+
+      <div class="popular-times">
+        <div class="pt-title mono">Popular Times</div>
+        <div class="pt-day">Thursday</div>
+        <div class="pt-bars" id="ptBars"></div>
+        <div class="pt-labels"><span>6a</span><span>9a</span><span>12p</span><span>3p</span><span>6p</span><span>9p</span></div>
+        <div class="live-tag"><span class="live-dot"></span> Live: a little busy right now</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-cta">
+      <h2>Sit down. Or sign up.</h2>
+      <div class="foot-btns">
+        <a class="foot-btn" href="tel:09021425152">Call 090214 25152</a>
+        <a class="foot-btn" href="https://wa.me/9021425152" target="_blank" rel="noopener">WhatsApp Us</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Shekhar Unisex Salon &amp; Academy — Chhatrapati Sambhajinagar</span>
+      <span>4.8 ★ · 3,415 Reviews · Open Daily</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* nav background on scroll */
+const nav = document.getElementById('nav');
+ScrollTrigger.create({
+  start: 40, end: 99999,
+  onUpdate: (self) => {
+    nav.classList.toggle('scrolled', self.scroll() > 40);
+  }
+});
+
+/* progress bar */
+gsap.to('#progress', {
+  width: '100%', ease:'none',
+  scrollTrigger:{ scroll: 1, start:0, end: () => document.body.scrollHeight - window.innerHeight, scrub:0.3 }
+});
+
+/* HERO cape reveal on load */
+window.addEventListener('DOMContentLoaded', () => {
+  const tl = gsap.timeline({ defaults:{ ease:'power3.out' } });
+  tl.to('#cape-path', {
+      duration:1.4,
+      attr:{ d:"M0,0 L1440,0 L1440,0 L0,0 Z" },
+      ease:'power4.inOut'
+    })
+    .from('.reveal-hero', { y:34, opacity:0, stagger:0.12, duration:0.9 }, "-=0.8");
+});
+
+/* hero parallax on scroll */
+gsap.to('.hero-inner', {
+  y: 120, opacity: 0.3, ease:'none',
+  scrollTrigger:{ trigger:'#hero', start:'top top', end:'bottom top', scrub:true }
+});
+gsap.to('.rating-float', {
+  y: 60, ease:'none',
+  scrollTrigger:{ trigger:'#hero', start:'top top', end:'bottom top', scrub:true }
+});
+
+/* marquee infinite scroll, speeds up while user scrolls page */
+let marqueeTween = gsap.to('#marquee', { xPercent:-50, duration:22, ease:'none', repeat:-1 });
+ScrollTrigger.create({
+  start:0, end: 99999,
+  onUpdate: (self) => {
+    const v = Math.min(Math.abs(self.getVelocity())/1200, 6);
+    marqueeTween.timeScale(1 + v);
+  }
+});
+
+/* generic reveal-on-scroll for cards */
+gsap.utils.toArray('.reveal').forEach((el, i) => {
+  gsap.to(el, {
+    opacity:1, y:0, duration:0.9, ease:'power3.out',
+    scrollTrigger:{ trigger: el, start:'top 88%' },
+    delay: (i % 3) * 0.08
+  });
+});
+
+/* services cards stagger */
+gsap.utils.toArray('.svc-card').forEach((el,i) => {
+  gsap.to(el, {
+    opacity:1, y:0, duration:0.8, ease:'power3.out', delay:(i%3)*0.08,
+    scrollTrigger:{ trigger: el, start:'top 90%' }
+  });
+});
+
+/* ACADEMY horizontal pinned scroll */
+function buildAcademyScroll(){
+  const track = document.getElementById('academyTrack');
+  const pin = document.getElementById('academyPin');
+  const distance = () => track.scrollWidth - window.innerWidth + (window.innerWidth * 0.06 * 2);
+
+  ScrollTrigger.create({
+    trigger: '#academy',
+    start: 'top top',
+    end: () => '+=' + distance(),
+    pin: true,
+    scrub: 1,
+    invalidateOnRefresh: true,
+    onUpdate: (self) => {
+      gsap.set(track, { x: -distance() * self.progress });
+    }
+  });
+}
+buildAcademyScroll();
+
+/* popular times bars */
+const data = [10,8,14,20,32,55,72,60,48,40,66,88,95,80,58,42,30,20,14,10,6,4,3,2];
+const ptBars = document.getElementById('ptBars');
+const nowIndex = 17; // arbitrary "current hour" marker for live feel
+data.forEach((v,i) => {
+  const bar = document.createElement('div');
+  bar.className = 'pt-bar' + (i === nowIndex ? ' now' : '');
+  bar.style.setProperty('height', v + '%');
+  ptBars.appendChild(bar);
+});
+gsap.to('.pt-bar', {
+  scaleY:1, duration:0.8, ease:'power3.out', stagger:0.02,
+  scrollTrigger:{ trigger:'.popular-times', start:'top 85%' }
+});
+
+/* refresh on resize */
+window.addEventListener('resize', () => ScrollTrigger.refresh());
+</script>
+</body>
+</html>
